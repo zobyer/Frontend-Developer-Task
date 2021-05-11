@@ -1,30 +1,50 @@
 <template>
   <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    
   </div>
   <router-view/>
 </template>
 
+<script>
+import Swal from "sweetalert2";
+
+export default {
+  methods:{
+    sweetalert() {
+      //console.log(localStorage.getItem("islogged"));
+      if (localStorage.getItem("islogged") == "true") {
+        Swal.fire({
+          position: "top-end",
+          width: 400,
+          icon: "success",
+          title: "You Have Successfully Logged In!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
+    },
+  },
+  watch: {
+    $route(to, from) {
+      //console.log(to.name, from.name);
+      if( to.name == "Home" && from.name == "Login"){
+        this.sweetalert();
+      }
+    },
+  },
+}
+</script>
+
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
 }
-
-#nav {
-  padding: 30px;
+h1{
+  font-family: "Special Elite", cursive;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>
