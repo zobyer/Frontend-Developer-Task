@@ -17,6 +17,13 @@ Whole Home page is divided into three components:
 #### Navigation Bar
 Instead of anchor tag router-link to used to redirect from one page to another page. flex is used as display property and space is set around the links. Hover and transition effect is used on the router links to make them more attractive.
 
+#### Available Medical Devices(/modeltype route)
+To display all the medical devices at first the data is extracted from the server. Axios get request is used for the data extraction and the extracted data is stored on allmedicaldata. This whole process is written inside the getAllmedicaldevice() method and this method is called from created() hook as we don't need to work on any DOM manipulations. After extracting all the data inside the template a for loop is used to access through each of the individual data and individual data are sent to the available medical device component. Where a card is made to show information. Name and BrandId are displayed using h3 tag as highlighting these two information and comment, description are displayed using p tag. all the cards are displayed within a given width range to avoid from generating extra large cards. Hover effect is used on them to make them more attractive and beautiful.
+All of the cards are displayed using flex property , equal space is distributed between them.
+
+#### Medical Device Model Data Based on Request(/modeldata route)
+The task is when a user clicks on a car(Medical Device) it shows all the medical device models on an overlay dialog. A component is created which will act as overlay dialog box to show all the medical device based on model. showdata variable is used to determine when to show the component. If a used click on a card then first it check if the component is already visible or not. If the component is visible then it set the visibility to false and show the user home page. On the contrary if showdata is false then first it extract the from the serve based on the selected medical device(card) then sets the visibility to true and send the related data to the modeldata component. In model data component for loop is used to traverse through all the available data and show them in a HTML table. Overflow property of the dialogue box is set to scroll so that the user can access all the data staying on the same window. Z-index is set to max value to show the dialog box top of all elements of the home page. On the top of the dialog box cancel icon is added to Exclude the div. Clicking on the cancel icon calls the same toggle function to set the visibility to false.
+
 # task1
 
 ## Project setup

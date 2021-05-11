@@ -18,9 +18,7 @@
 export default {
   props: ["medicaldata"],
   methods:{
-    show_details(){
-      this.$emit("toogle");
-    }
+    
   }
 };
 </script>
