@@ -69,17 +69,7 @@ export default {
           //console.log(err);
         });
     },
-    checkloggedin() {
-      console.log("Called");
-      axios
-        .get("http://163.47.115.230:30000/api/login")
-        .then((response) => {
-          console.log(response.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
+    
     sweetalert() {
       if (!this.isValid) {
         Swal.fire({
@@ -179,14 +169,5 @@ input[type="password"] {
   padding: 16px;
 }
 
-/* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-  span.psw {
-    display: block;
-    float: none;
-  }
-  .cancelbtn {
-    width: 100%;
-  }
-}
+
 </style>
