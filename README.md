@@ -24,6 +24,9 @@ All of the cards are displayed using flex property , equal space is distributed 
 #### Medical Device Model Data Based on Request(/modeldata route)
 The task is when a user clicks on a car(Medical Device) it shows all the medical device models on an overlay dialog. A component is created which will act as overlay dialog box to show all the medical device based on model. showdata variable is used to determine when to show the component. If a used click on a card then first it check if the component is already visible or not. If the component is visible then it set the visibility to false and show the user home page. On the contrary if showdata is false then first it extract the from the serve based on the selected medical device(card) then sets the visibility to true and send the related data to the modeldata component. In model data component for loop is used to traverse through all the available data and show them in a HTML table. Overflow property of the dialogue box is set to scroll so that the user can access all the data staying on the same window. Z-index is set to max value to show the dialog box top of all elements of the home page. On the top of the dialog box cancel icon is added to Exclude the div. Clicking on the cancel icon calls the same toggle function to set the visibility to false.
 
+### 2. Add Device
+Alike login page here also a form is constructed to take BrandId, Name, Comment input from the users.
+
 # task1
 
 ## Project setup

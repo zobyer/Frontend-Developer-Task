@@ -1,27 +1,50 @@
 <template>
   <navbar />
+
   <div class="add_container">
     <h1>ADD NEW DEVICE</h1>
     <form @submit.prevent="insertdevicemodel">
       <div class="container">
-        <label><b>Brand Id</b></label>
-        <input
-          type="text"
-          placeholder="Enter Brand Id"
-          v-model="BrandId"
-          required
-        />
+        <div class="box">
+          <label><b>Select Description Below</b></label>
+          <input
+            type="text"
+            v-model="Description"
+            @click="visibile ? (visibile = false) : (visibile = true)"
+            readonly
+            placeholder="Click here, select a description from below"
+            required
+          />
+          <div class="names" v-if="visibile">
+            <ul v-for="device in devicetype" :key="device.Id">
+              <li
+                @click="
+                  setdevice(device.Id, device.Description), (visibile = false)
+                "
+              >
+                {{ device.Description }}
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="box" @click="visibile = false">
+          <label><b>Brand Id</b></label>
+          <input
+            type="text"
+            placeholder="Enter Brand Id"
+            v-model="BrandId"
+            required
+          />
+        </div>
 
-        <label><b>Name</b></label>
-        <input type="text" placeholder="Enter Name" v-model="Name" required />
-
-        <label><b>Comment</b></label>
-        <input
-          type="text"
-          placeholder="Enter Comment"
-          v-model="Comment"
-          required
-        />
+        <div class="box" @click="visibile = false">
+          <label><b>Name</b></label>
+          <input type="text" placeholder="Enter Name" v-model="Name" required />
+        </div>
+        <div class="box" @click="visibile = false">
+          <label><b>Comment</b></label>
+          <input type="text" placeholder="Enter Name" v-model="Comment" required/>
+        </div>
       </div>
       <button class="login">Add Device</button>
     </form>
@@ -31,7 +54,7 @@
 <script>
 import axios from "axios";
 import Swal from "sweetalert2";
-import Navbar from '../components/Navbar.vue';
+import Navbar from "../components/Navbar.vue";
 
 export default {
   components: { Navbar },
@@ -41,10 +64,13 @@ export default {
       Name: "",
       TypeId: "",
       Comment: "",
+      Description: "",
+      devicetype: null,
+      visibile: false,
     };
   },
   methods: {
-    gettypeid() {
+    getdevicetype() {
       axios
         .get("http://163.47.115.230:30000/api/devicetype?limit=40&page=1", {
           headers: {
@@ -52,25 +78,30 @@ export default {
           },
         })
         .then((response) => {
-          this.TypeId = response.data[1] +1;
-          //console.log("type Id",response.data[1]);
+          this.devicetype = response.data[0];
+          //console.log(this.devicetype);
         })
         .catch((err) => {
           console.log(err);
         });
     },
     insertdevicemodel() {
+      console.log(this.BrandId, this.Name, this.TypeId, this.Comment, localStorage.getItem("access_token"))
       axios
-        .post("http://163.47.115.230:30000/api/devicemodel", {
-          BrandId: this.BrandId,
-          Name: this.Name,
-          TypeId: this.TypeId,
-          Comment:this.Comment
-        },{
-           headers: {
-            authorization: localStorage.getItem("access_token"),
+        .post(
+          "http://163.47.115.230:30000/api/devicemodel",
+          {
+            BrandId: this.BrandId,
+            Name: this.Name,
+            TypeId: this.TypeId,
+            Comment: this.Comment,
           },
-        })
+          {
+            headers: {
+              authorization: localStorage.getItem("access_token"),
+            },
+          }
+        )
         .then((res) => {
           this.succesfulinsert();
           this.sweetalert();
@@ -78,19 +109,19 @@ export default {
         })
         .catch((err) => {
           this.failedsweetalert();
-          //console.log(err);
+          console.log(err);
         });
     },
-    succesfulinsert(){
-       this.gettypeid();
-       this.BrandId = "";
-       this.Name = "";
-       this.Comment = "";
+    succesfulinsert() {
+      this.BrandId = "";
+      this.Name = "";
+      this.Comment = "";
+      this.Description="";
     },
     sweetalert() {
       //console.log(localStorage.getItem("islogged"));
-      if (localStorage.getItem("islogged") == 'true') {
-          Swal.fire({
+      if (localStorage.getItem("islogged") == "true") {
+        Swal.fire({
           position: "top-end",
           width: 400,
           icon: "success",
@@ -102,8 +133,8 @@ export default {
     },
     failedsweetalert() {
       //console.log(localStorage.getItem("islogged"));
-      if (localStorage.getItem("islogged") == 'true') {
-          Swal.fire({
+      if (localStorage.getItem("islogged") == "true") {
+        Swal.fire({
           position: "top-end",
           width: 400,
           icon: "error",
@@ -113,9 +144,13 @@ export default {
         });
       }
     },
+    setdevice(Id, Description) {
+      this.TypeId = Id;
+      this.Description = Description;
+    },
   },
   created() {
-    this.gettypeid();
+    this.getdevicetype();
   },
 };
 </script>
@@ -127,11 +162,31 @@ export default {
   font-family: "Special Elite", cursive;
 }
 
-.add_container .container input[type="text"]{
+.add_container .container input[type="text"] {
   color: black;
 }
-@media screen and (max-width: 800px){
-  .add_container{
+
+.names {
+  position: absolute;
+  background: #333;
+  color: white;
+  margin-top: 0;
+  max-height: 300px;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+.names ul {
+  list-style: none;
+}
+.names ul li {
+  cursor: pointer;
+}
+
+.box {
+  margin: 15px;
+}
+@media screen and (max-width: 800px) {
+  .add_container {
     width: 70%;
   }
 }
