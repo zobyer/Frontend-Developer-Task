@@ -87,10 +87,10 @@ export default {
 </script>
 
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Special+Elite&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
 
 .swal2-title{
-  font-family: "Special Elite", cursive;
+  font-family: 'Open Sans', sans-serif;
   font-size: 20px !important;
 }
 .swal2-popup {
@@ -100,7 +100,7 @@ font-size: .5rem !important;
 
 .main_container {
   overflow: hidden;
-  font-family: "Special Elite", cursive;
+  font-family: 'Open Sans', sans-serif;
 }
 .image_con {
   position: relative;
@@ -143,7 +143,7 @@ input[type="password"] {
   border: none;
   border-bottom: 2px solid #ff0057;
   box-sizing: border-box;
-  font-family: "Special Elite", cursive;
+  font-family: 'Open Sans', sans-serif;
   font-size: 18px;
 }
 
@@ -156,7 +156,7 @@ input[type="password"] {
   cursor: pointer;
   width: 40%;
   border-radius: 20px;
-  font-family: "Special Elite", cursive;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .login:hover {

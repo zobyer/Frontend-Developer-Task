@@ -29,8 +29,7 @@ export default {
 }
 
 .data .column {
-  min-width: 200px;
-  max-width: 400px;
+  width: 300px;
 }
 .data .column a {
   text-decoration: none;

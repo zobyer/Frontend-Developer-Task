@@ -43,7 +43,7 @@ export default {
   color: #2c3e50;
 }
 h1{
-  font-family: "Special Elite", cursive;
+  font-family: 'Open Sans', sans-serif;
 }
 
 

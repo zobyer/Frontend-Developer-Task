@@ -51,7 +51,7 @@
   </div>
 </template>
 
-<script>
+<script >
 import axios from "axios";
 import Swal from "sweetalert2";
 import Navbar from "../components/Navbar.vue";
@@ -159,7 +159,7 @@ export default {
 .add_container {
   margin: auto;
   width: 50%;
-  font-family: "Special Elite", cursive;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .add_container .container input[type="text"] {
